@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 215.47 39.84">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Kameron-Bold, Kameron;
+        font-size: 34px;
+        font-weight: 700;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #232323;
+      }
+    </style>
+  </defs>
+  <g id="navigation">
+    <text class="cls-1" transform="translate(53.99 27.86)"><tspan x="0" y="0">SIMPLIST</tspan></text>
+    <path class="cls-2" d="M10.38,22.53l10.03-10.03-1.49-1.49-8.54,8.54-4.13-4.13-1.49,1.49,5.63,5.63ZM2.08,29.51c-.56,0-1.04-.21-1.46-.63-.42-.42-.63-.9-.63-1.46V6.59c0-.56,.21-1.04,.63-1.46,.42-.42,.9-.63,1.46-.63H22.92c.56,0,1.04,.21,1.46,.63,.42,.42,.63,.9,.63,1.46V27.43c0,.56-.21,1.04-.63,1.46-.42,.42-.9,.63-1.46,.63H2.08Zm0-2.08H22.92V6.59H2.08V27.43ZM2.08,6.59v0Z"/>
+  </g>
+</svg>
