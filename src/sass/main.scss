@@ -1,19 +1,31 @@
-$main-font: "Overpass", sans-serif;
+@import "/node_modules/hamburgers/_sass/hamburgers/hamburgers.scss";
+
+$serif-font: "Kameron", Times, serif;
+$sans-serif-font: "Roboto", open-sans, sans-serif;
+$accent-color: #232323;
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 body {
-  font-family: $main-font;
+	font-family: $sans-serif-font;
 }
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
 ul {
-  list-style: none;
+	list-style-type: none;
 }
 a {
-  text-decoration: none;
+	text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $serif-font;
 }
