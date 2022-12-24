@@ -1,3 +1,3 @@
 import "./sass/main.scss";
-
-console.log("this is also a test");
+import { openHamburgerMenu } from "./modules/hamburgerMenu.js";
+openHamburgerMenu();
