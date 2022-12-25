@@ -14,6 +14,11 @@
 			rel="stylesheet"
 		/>
 
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+
 		<title>To-do List</title>
 	</head>
 	<body>
@@ -45,13 +50,27 @@
 					<span class="material-icons-outlined pulse side-uncategorized-icon"
 						>inbox
 					</span>
-					<p class="side-uncategorized-paragraph">uncategorized</p>
+					<p class="side-uncategorized-paragraph">Uncategorized</p>
 				</div>
 				<div class="side-projects">
-					<p class="side-projects-paragraph">
-						<span class="material-icons-outlined">expand_more </span>
-						Projects
-					</p>
+					<div class="side-projects-menu">
+						<p class="side-projects-paragraph">
+							<span class="material-icons-outlined expand-projects"
+								>expand_more
+							</span>
+							Projects
+						</p>
+						<span class="material-icons-outlined add-projects"> add </span>
+					</div>
+					<ul class="side-projects-list">
+						<li class="side-projects-list-item">
+							Very long project name that might go out
+						</li>
+						<li class="side-projects-list-item">project2</li>
+						<li class="side-projects-list-item">project3</li>
+						<li class="side-projects-list-item">project4</li>
+						<li class="side-projects-list-item">project5</li>
+					</ul>
 				</div>
 			</aside>
 			<main class="main-container">
