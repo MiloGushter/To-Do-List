@@ -8,7 +8,7 @@ module.exports = {
 	output: {
 		filename: "[name].js",
 		path: path.resolve(__dirname, "dist"),
-		assetModuleFilename: "resources/[hash][name][ext]",
+		assetModuleFilename: "resources/[name]-[hash][ext]",
 		clean: true,
 	},
 	module: {
