@@ -14,14 +14,21 @@
 			rel="stylesheet"
 		/>
 
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-		/>
-
 		<title>To-do List</title>
 	</head>
 	<body>
+		<div class="modal">
+			<div class="modal-content">
+				<form>
+					<label for="inputField">Enter the project name</label>
+					<input type="text" id="inputField" class="input-field" />
+					<div class="modal-content-buttons">
+						<button type="button" class="button save-button">Save</button>
+						<button type="button" class="button cancel-button">Cancel</button>
+					</div>
+				</form>
+			</div>
+		</div>
 		<div class="container-grid">
 			<nav>
 				<div class="nav-container">
