@@ -7,7 +7,7 @@ export function showProjectModal() {
 	const createProject = document.querySelector(".add-projects");
 	let projects = [];
 
-	function addStyles() {
+	function resetStyles() {
 		projectName.value = "";
 		modal.classList.add("modal-going-out");
 		setTimeout(() => {
@@ -18,6 +18,14 @@ export function showProjectModal() {
 
 	createProject.onclick = () => {
 		modal.style.display = "block";
+	};
+
+	cancelButton.onclick = () => resetStyles();
+
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			resetStyles();
+		}
 	};
 
 	saveButton.onclick = () => {
@@ -31,14 +39,6 @@ export function showProjectModal() {
 		projectsListItem.textContent = projectName.value;
 		projectsList.append(projectsListItem);
 
-		addStyles();
-	};
-
-	cancelButton.onclick = () => addStyles();
-
-	window.onclick = function (event) {
-		if (event.target == modal) {
-			addStyles();
-		}
+		resetStyles();
 	};
 }
