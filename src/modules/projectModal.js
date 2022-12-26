@@ -4,7 +4,7 @@ export function showProjectModal() {
 	const saveButton = document.querySelector("#save-button-project");
 	const cancelButton = document.querySelector("#cancel-button-project");
 	const projectName = document.querySelector("#input-project-name");
-	const createProject = document.querySelector(".add-projects");
+	const createProjectButton = document.querySelector(".add-projects");
 	let projects = [];
 
 	function resetStyles() {
@@ -16,7 +16,7 @@ export function showProjectModal() {
 		}, 300);
 	}
 
-	createProject.onclick = () => {
+	createProjectButton.onclick = () => {
 		modal.style.display = "block";
 	};
 
