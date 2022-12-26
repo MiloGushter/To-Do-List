@@ -14,6 +14,14 @@
 			rel="stylesheet"
 		/>
 
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+			integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
 		<title>To-do List</title>
 	</head>
 	<body>
@@ -124,7 +132,29 @@
 				</div>
 			</aside>
 			<main class="main-container">
-				<div class="task-card"></div>
+				<div class="main-container-cards">
+					<div class="task-card">
+						<p class="task-card-title">
+							Title of the task
+							<i class="fa-sharp fa-solid fa-pen fa-sm"></i>
+						</p>
+						<p class="task-card-description">
+							Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+							Fugiat iusto enim animi ipsa vel, quod blanditiis corrupti! A
+							qui consectetur mollitia, quod eum eius obcaecati cum officiis
+							inventore veritatis corrupti.
+						</p>
+						<div class="task-card-info">
+							<p class="task-card-date">
+								<i class="fa-regular fa-calendar"></i> 01.01.2222
+							</p>
+							<p class="task-card-priority">
+								<i class="fa-regular fa-flag"></i>Medium
+							</p>
+						</div>
+						<button class="task-card-button button">FINISHED</button>
+					</div>
+				</div>
 			</main>
 		</div>
 	</body>
