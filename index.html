@@ -17,14 +17,53 @@
 		<title>To-do List</title>
 	<link rel="icon" href="favicon.ico"><script defer src="main.js"></script></head>
 	<body>
-		<div class="modal">
-			<div class="modal-content">
+		<div class="modal" id="modal-project">
+			<div class="modal-content" id="modal-content-project">
 				<form>
-					<label for="inputField">Enter the project name</label>
-					<input type="text" id="inputField" class="input-field" />
+					<label for="project-name">Enter the project name</label>
+					<input type="text" id="input-project-name" class="input-field" />
 					<div class="modal-content-buttons">
-						<button type="button" class="button save-button">Save</button>
-						<button type="button" class="button cancel-button">Cancel</button>
+						<button
+							type="button"
+							class="button save-button"
+							id="save-button-project"
+						>
+							Save
+						</button>
+						<button
+							type="button"
+							class="button cancel-button"
+							id="cancel-button-project"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="modal" id="modal-task">
+			<div class="modal-content" id="modal-content-task">
+				<form>
+					<label for="inputField">Enter the task</label>
+					<input type="text" id="input-task-name" class="input-field" />
+					<label for="inputField">Enter the description</label>
+					<input type="text" id="input-task-description" class="input-field" />
+					<input type="datetime" name="" id="" />
+					<div class="modal-content-buttons">
+						<button
+							type="button"
+							class="button save-button"
+							id="save-button-task"
+						>
+							Save
+						</button>
+						<button
+							type="button"
+							class="button cancel-button"
+							id="cancel-button-task"
+						>
+							Cancel
+						</button>
 					</div>
 				</form>
 			</div>
@@ -44,7 +83,12 @@
 							<span class="material-icons-outlined size-40"> home </span>
 						</li>
 						<li class="nav-list-button">
-							<span class="material-icons-outlined size-40"> add_box </span>
+							<span
+								class="material-icons-outlined size-40"
+								id="nav-create-task"
+							>
+								add_box
+							</span>
 						</li>
 					</ul>
 					<div class="nav-logo">
