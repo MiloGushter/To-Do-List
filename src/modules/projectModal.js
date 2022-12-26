@@ -16,6 +16,10 @@ export function showProjectModal() {
 		}, 300);
 	}
 
+	createProject.onclick = () => {
+		modal.style.display = "block";
+	};
+
 	saveButton.onclick = () => {
 		console.log(`Name of the project is ${projectName.value}`);
 		projects.push(new projectCreation(projectName.value, {}));
@@ -28,10 +32,6 @@ export function showProjectModal() {
 		projectsList.append(projectsListItem);
 
 		addStyles();
-	};
-
-	createProject.onclick = () => {
-		modal.style.display = "block";
 	};
 
 	cancelButton.onclick = () => addStyles();
