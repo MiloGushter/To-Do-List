@@ -1,6 +1,6 @@
 import { createProject } from "./projectCreation";
 import { populateProjects } from "./taskModal";
-export let projects = [];
+export let projects = [{ name: "Uncategorized", tasks: [] }];
 export function showProjectModal() {
 	const modal = document.querySelector("#modal-project");
 	const saveButton = document.querySelector("#save-button-project");
@@ -31,8 +31,7 @@ export function showProjectModal() {
 
 	saveButton.onclick = () => {
 		console.log(`Name of the project is ${projectName.value}`);
-		projects.push(new createProject(projectName.value, {}));
-		console.log(projects);
+		projects.push(new createProject(projectName.value, []));
 
 		const projectsList = document.querySelector(".side-projects-list");
 		const projectsListItem = document.createElement("li");
