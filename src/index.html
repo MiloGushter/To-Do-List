@@ -28,7 +28,7 @@
 		<div class="modal" id="modal-project">
 			<div class="modal-content" id="modal-content-project">
 				<form>
-					<label for="project-name">Enter the project name</label>
+					<label for="input-project-name">Enter the project name</label>
 					<input type="text" id="input-project-name" class="input-field" />
 					<div class="modal-content-buttons">
 						<button
@@ -52,11 +52,32 @@
 		<div class="modal" id="modal-task">
 			<div class="modal-content" id="modal-content-task">
 				<form>
-					<label for="inputField">Enter the task</label>
-					<input type="text" id="input-task-name" class="input-field" />
-					<label for="inputField">Enter the description</label>
-					<input type="text" id="input-task-description" class="input-field" />
-					<input type="datetime" name="" id="" />
+					<label for="task-input-name">Enter the task</label>
+					<input type="text" id="task-input-name" class="input-field" />
+					<label for="task-input-description">Enter the description</label>
+					<textarea
+						id="task-input-description"
+						class="textarea-field"
+						rows="1"
+					></textarea>
+					<div class="modal-content-inputs">
+						<input
+							type="date"
+							name=""
+							id="task-input-date"
+							class="input-date"
+						/>
+						<select id="task-select-project" class="input-select">
+							<option value="project1">project1</option>
+							<option value="project2">project2</option>
+							<option value="project3">project3</option>
+						</select>
+						<select id="task-select-priority" class="input-select">
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
+						</select>
+					</div>
 					<div class="modal-content-buttons">
 						<button
 							type="button"
@@ -65,7 +86,11 @@
 						>
 							Save
 						</button>
-						<button type="button" class="button cancel-button" id="">
+						<button
+							type="button"
+							class="button cancel-button"
+							id="cancel-button-task"
+						>
 							Cancel
 						</button>
 					</div>
