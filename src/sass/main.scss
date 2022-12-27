@@ -7,6 +7,8 @@ $accent-color-900: #232323;
 $accent-color-700: #323232;
 $accent-color-500: #323232;
 
+$accent-border-slim: 1px solid $accent-color-900;
+
 *,
 *::before,
 *::after {
@@ -32,7 +34,7 @@ a {
 input {
 	background-color: transparent;
 	border: none;
-	border-bottom: 1px solid $accent-color-900;
+	border-bottom: $accent-border-slim;
 }
 input:focus {
 	outline: none;
@@ -80,6 +82,10 @@ h6 {
 		color: rgba(255, 255, 255, 0.3);
 	}
 }
+
+// =============
+// 	Modal
+// =============
 
 .modal {
 	position: fixed;
@@ -132,8 +138,12 @@ h6 {
 	transition: opacity 300ms ease;
 }
 
+// =================
+// 	Modal elements
+// ================
+
 .button {
-	border: 1px solid $accent-color-900;
+	border: $accent-border-slim;
 	text-transform: uppercase;
 	color: $accent-color-900;
 	background-color: #fff;
@@ -154,6 +164,39 @@ h6 {
 		color: $accent-color-900;
 	}
 }
+
+.textarea-field {
+	padding: 0 0 3px 2px;
+
+	border: none;
+	resize: none;
+	border-bottom: $accent-border-slim;
+	margin-bottom: 3em;
+	&:focus {
+		outline: none;
+	}
+}
+
+.input-date {
+	border: $accent-border-slim;
+}
+
+.input-select {
+	background-color: transparent;
+	border: $accent-border-slim;
+	padding: 0.125em 1em;
+}
+
+.modal-content-inputs {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	flex: 1;
+}
+
+// =============
+// 	Navigation
+// =============
 
 nav {
 	border-bottom: 2px solid $accent-color-900;
@@ -194,9 +237,17 @@ nav {
 	color: $accent-color-900;
 }
 
+// ===============
+// 	Main and side
+// ===============
+
 .container {
 	display: flex;
 }
+
+// =============
+// 	Side
+// =============
 
 .side-container {
 	font-size: 1.125rem;
@@ -277,7 +328,9 @@ nav {
 	}
 }
 
-// Main
+// =============
+// 	Main
+// =============
 
 .main-container {
 	flex: 1;
@@ -293,7 +346,7 @@ nav {
 .task-card {
 	max-width: 350px;
 	min-width: 265px;
-	border: 1px solid $accent-color-900;
+	border: $accent-border-slim;
 	padding: 1em 1.5em;
 	& > :not(:last-child) {
 		margin-bottom: 1em;
@@ -305,6 +358,10 @@ nav {
 		margin-bottom: 0.75em;
 	}
 }
+
+// =============
+// 	Card
+// =============
 
 .task-card-title {
 	font-family: $serif-font;
@@ -336,6 +393,10 @@ nav {
 		margin-right: 0.5em;
 	}
 }
+
+// =============
+// 	Animations
+// =============
 
 @keyframes modalAnimation {
 	from {
