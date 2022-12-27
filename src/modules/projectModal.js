@@ -1,11 +1,12 @@
-import { projectCreation } from "./projectCreation";
+import { createProject } from "./projectCreation";
+import { populateProjects } from "./taskModal";
+export let projects = [];
 export function showProjectModal() {
 	const modal = document.querySelector("#modal-project");
 	const saveButton = document.querySelector("#save-button-project");
 	const cancelButton = document.querySelector("#cancel-button-project");
 	const projectName = document.querySelector("#input-project-name");
 	const createProjectButton = document.querySelector(".add-projects");
-	let projects = [];
 
 	function resetStyles() {
 		projectName.value = "";
@@ -30,7 +31,7 @@ export function showProjectModal() {
 
 	saveButton.onclick = () => {
 		console.log(`Name of the project is ${projectName.value}`);
-		projects.push(new projectCreation(projectName.value, {}));
+		projects.push(new createProject(projectName.value, {}));
 		console.log(projects);
 
 		const projectsList = document.querySelector(".side-projects-list");
@@ -39,6 +40,7 @@ export function showProjectModal() {
 		projectsListItem.textContent = projectName.value;
 		projectsList.append(projectsListItem);
 
+		populateProjects();
 		resetStyles();
 	};
 }
