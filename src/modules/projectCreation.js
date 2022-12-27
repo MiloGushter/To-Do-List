@@ -1,4 +1,4 @@
-export function createProject(projectName, projectTasks) {
-	this.projectName = projectName;
-	this.projectTasks = projectTasks;
+export function createProject(name, tasks) {
+	this.name = name;
+	this.tasks = tasks;
 }

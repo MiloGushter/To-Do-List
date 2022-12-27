@@ -1,13 +1,7 @@
-export const createTask = (
-	taskName,
-	taskDescription,
-	taskDate,
-	taskOfProject,
-	taskPriority
-) => {
-	this.taskName = taskName;
-	this.taskDescription = taskDescription;
-	this.taskDate = taskDate;
-	this.taskOfProject = taskOfProject;
-	this.taskPriority = taskPriority;
+export const createTask = (name, description, date, fromProject, priority) => {
+	this.name = name;
+	this.description = description;
+	this.date = date;
+	this.fromProject = fromProject;
+	this.priority = priority;
 };
