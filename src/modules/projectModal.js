@@ -1,6 +1,21 @@
 import { createProject } from "./projectCreation";
 import { populateProjects } from "./taskModal";
-export let projects = [{ name: "Uncategorized", tasks: [] }];
+import { populateContent } from "./populateMainContent";
+
+export let projects = [
+	{
+		name: "Uncategorized",
+		tasks: [
+			{
+				name: "Sample task",
+				description: "This is some long text for the description of this task",
+				date: "2023-01-05",
+				fromProject: "Uncategorized",
+				priority: "low",
+			},
+		],
+	},
+];
 export function showProjectModal() {
 	const modal = document.querySelector("#modal-project");
 	const saveButton = document.querySelector("#save-button-project");
@@ -39,6 +54,7 @@ export function showProjectModal() {
 		projectsListItem.textContent = projectName.value;
 		projectsList.append(projectsListItem);
 
+		populateContent();
 		populateProjects();
 		resetStyles();
 	};
