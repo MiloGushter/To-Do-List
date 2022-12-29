@@ -1,6 +1,6 @@
-import { projects } from "./projectModal";
 import { createTask } from "./taskCreation";
-
+import { populateContent } from "./populateMainContent";
+let projects = JSON.parse(localStorage.getItem("myProjects"));
 const modal = document.querySelector("#modal-task");
 
 const inputTaskName = document.querySelector("#task-input-name");
@@ -44,14 +44,14 @@ export function showTaskModal() {
 
 	saveButton.onclick = () => {
 		createNewTask();
+		populateContent();
 		resetStyles();
 	};
 }
 
-export const populateProjects = () => {
+export const populateProjectsForTask = () => {
 	const selectProject = document.querySelector("#task-select-project");
 	for (let project of projects) {
-		console.log(project.name);
 		const selectOption = document.createElement("option");
 		selectOption.textContent = project.name;
 		selectOption.value = project.name;
@@ -75,5 +75,6 @@ const createNewTask = () => {
 		taskPriority
 	);
 	project.tasks.push(newTask);
+	localStorage.setItem("myProjects", JSON.stringify(projects));
 	console.log(projects);
 };
