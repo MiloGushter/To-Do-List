@@ -1,21 +1,9 @@
 import { createProject } from "./projectCreation";
-import { populateProjects } from "./taskModal";
+import { populateProjectsForTask } from "./taskModal";
 import { populateContent } from "./populateMainContent";
 
-export let projects = [
-	{
-		name: "Uncategorized",
-		tasks: [
-			{
-				name: "Sample task",
-				description: "This is some long text for the description of this task",
-				date: "2023-01-05",
-				fromProject: "Uncategorized",
-				priority: "low",
-			},
-		],
-	},
-];
+let projects = JSON.parse(localStorage.getItem("myProjects"));
+
 export function showProjectModal() {
 	const modal = document.querySelector("#modal-project");
 	const saveButton = document.querySelector("#save-button-project");
@@ -23,7 +11,7 @@ export function showProjectModal() {
 	const projectName = document.querySelector("#input-project-name");
 	const createProjectButton = document.querySelector(".add-projects");
 
-	function resetStyles() {
+	function resetForm() {
 		projectName.value = "";
 		modal.classList.add("modal-going-out");
 		setTimeout(() => {
@@ -36,17 +24,18 @@ export function showProjectModal() {
 		modal.style.display = "block";
 	};
 
-	cancelButton.onclick = () => resetStyles();
+	cancelButton.onclick = () => resetForm();
 
 	window.onclick = function (event) {
 		if (event.target == modal) {
-			resetStyles();
+			resetForm();
 		}
 	};
 
 	saveButton.onclick = () => {
 		console.log(`Name of the project is ${projectName.value}`);
 		projects.push(new createProject(projectName.value, []));
+		localStorage.setItem("myProjects", JSON.stringify(projects));
 
 		const projectsList = document.querySelector(".side-projects-list");
 		const projectsListItem = document.createElement("li");
@@ -54,8 +43,18 @@ export function showProjectModal() {
 		projectsListItem.textContent = projectName.value;
 		projectsList.append(projectsListItem);
 
-		populateContent();
-		populateProjects();
-		resetStyles();
+		populateProjectsForTask();
+		resetForm();
 	};
+}
+
+export function populateProjectsList() {
+	const projectsList = document.querySelector(".side-projects-list");
+	for (let project of projects) {
+		const projectsListItem = document.createElement("li");
+		projectsListItem.classList.add("side-projects-list-item");
+		projectsListItem.textContent = project.name;
+		projectsListItem.addEventListener("click", populateContent());
+		projectsList.appendChild(projectsListItem);
+	}
 }
