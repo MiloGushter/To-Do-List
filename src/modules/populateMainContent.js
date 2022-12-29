@@ -1,4 +1,4 @@
-import { projects } from "./projectModal";
+let projects = JSON.parse(localStorage.getItem("myProjects"));
 
 export function populateContent() {
 	/* 
@@ -6,6 +6,7 @@ export function populateContent() {
 		! There is an error if I put it in global scope after import
 	*/
 	window.currentProject = projects[0];
+	createNewCard(projects[0].tasks);
 	const uncategorizedTasks = document.querySelector(".side-uncategorized");
 	uncategorizedTasks.onclick = () => createNewCard(projects[0].tasks);
 	const itemsOfProjects = document.querySelectorAll(".side-projects-list-item");
@@ -43,17 +44,19 @@ function createNewCard(tasks) {
 
 		const cardDate = document.createElement("p");
 		cardDate.classList.add("task-card-date");
+		const cardDateText = document.createTextNode(task.date);
 		const dateIcon = document.createElement("i");
 		dateIcon.classList.add("fa-regular", "fa-calendar");
 		cardDate.append(dateIcon);
-		cardDate.textContent = task.date;
+		cardDate.append(cardDateText);
 
 		const cardPriority = document.createElement("p");
 		cardPriority.classList.add("task-card-priority");
+		const cardPriorityText = document.createTextNode(task.priority);
 		const priorityIcon = document.createElement("i");
 		priorityIcon.classList.add("fa-regular", "fa-flag");
 		cardPriority.append(priorityIcon);
-		cardPriority.textContent = task.priority;
+		cardPriority.append(cardPriorityText);
 
 		const cardButton = document.createElement("button");
 		cardButton.classList.add("button", "task-card-button");
