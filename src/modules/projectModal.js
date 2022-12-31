@@ -1,4 +1,4 @@
-import { createProject } from "./projectCreation";
+import { createProject } from "./createProject";
 import { populateProjectsForTask } from "./taskModal";
 import { populateContent } from "./populateMainContent";
 
@@ -33,7 +33,6 @@ export function showProjectModal() {
 	};
 
 	saveButton.onclick = () => {
-		console.log(`Name of the project is ${projectName.value}`);
 		projects.push(new createProject(projectName.value, []));
 		localStorage.setItem("myProjects", JSON.stringify(projects));
 
@@ -51,10 +50,11 @@ export function showProjectModal() {
 export function populateProjectsList() {
 	const projectsList = document.querySelector(".side-projects-list");
 	for (let project of projects) {
+		if (project.name === "Uncategorized") continue;
 		const projectsListItem = document.createElement("li");
 		projectsListItem.classList.add("side-projects-list-item");
 		projectsListItem.textContent = project.name;
-		projectsListItem.addEventListener("click", populateContent());
 		projectsList.appendChild(projectsListItem);
+		projectsListItem.addEventListener("click", populateContent());
 	}
 }
