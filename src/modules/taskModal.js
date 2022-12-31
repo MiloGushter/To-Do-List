@@ -1,13 +1,6 @@
-import { createTask } from "./taskCreation";
+import { createTask } from "./createTask";
 import { populateContent } from "./populateMainContent";
 let projects = JSON.parse(localStorage.getItem("myProjects"));
-const modal = document.querySelector("#modal-task");
-
-const inputTaskName = document.querySelector("#task-input-name");
-const inputTaskDescription = document.querySelector("#task-input-description");
-const inputTaskDate = document.querySelector("#task-input-date");
-const selectProject = document.querySelector("#task-select-project");
-const selectPriority = document.querySelector("#task-select-priority");
 
 const resetStyles = () => {
 	inputTaskDescription.value = "";
@@ -20,9 +13,11 @@ const resetStyles = () => {
 };
 
 export function showTaskModal() {
+	const modal = document.querySelector("#modal-task");
 	const cancelButton = document.querySelector("#cancel-button-task");
 	const createTaskButton = document.querySelector("#nav-create-task");
 	const saveButton = document.querySelector("#save-button-task");
+	const inputTaskDescription = document.querySelector("#task-input-description");
 
 	// Making inputTaskDescription expand as you type
 	inputTaskDescription.addEventListener("input", () => {
@@ -44,7 +39,6 @@ export function showTaskModal() {
 
 	saveButton.onclick = () => {
 		createNewTask();
-		populateContent();
 		resetStyles();
 	};
 }
@@ -52,6 +46,7 @@ export function showTaskModal() {
 export const populateProjectsForTask = () => {
 	const selectProject = document.querySelector("#task-select-project");
 	for (let project of projects) {
+		if (project.name === "Uncategorized") continue;
 		const selectOption = document.createElement("option");
 		selectOption.textContent = project.name;
 		selectOption.value = project.name;
@@ -60,6 +55,12 @@ export const populateProjectsForTask = () => {
 };
 
 const createNewTask = () => {
+	const inputTaskName = document.querySelector("#task-input-name");
+	const inputTaskDescription = document.querySelector("#task-input-description");
+	const inputTaskDate = document.querySelector("#task-input-date");
+	const selectProject = document.querySelector("#task-select-project");
+	const selectPriority = document.querySelector("#task-select-priority");
+
 	const taskName = inputTaskName.value;
 	const taskDescription = inputTaskDescription.value;
 	const taskDate = inputTaskDate.value;
