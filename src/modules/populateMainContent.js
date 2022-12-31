@@ -1,23 +1,40 @@
+// let sample = [
+// 	{
+// 		name: "Uncategorized",
+// 		tasks: [
+// 			{
+// 				name: "Sample task",
+// 				description: "This is some long text for the description of this task",
+// 				date: "2023-01-05",
+// 				fromProject: "Uncategorized",
+// 				priority: "low",
+// 			},
+// 		],
+// 	},
+// ];
+// localStorage.setItem("myProjects", JSON.stringify(sample));
+
 let projects = JSON.parse(localStorage.getItem("myProjects"));
 
-export function populateContent() {
-	/* 
-		TODO: Figure out better way to make global variable
-		! There is an error if I put it in global scope after import
-	*/
-	window.currentProject = projects[0];
+let currentProject = projects[0];
+
+export function onLoadPopulate() {
 	createNewCard(projects[0].tasks);
+}
+
+export function populateContent() {
+	// For uncategorized tasks
 	const uncategorizedTasks = document.querySelector(".side-uncategorized");
 	uncategorizedTasks.onclick = () => createNewCard(projects[0].tasks);
+	// For showing taksks of some project
 	const itemsOfProjects = document.querySelectorAll(".side-projects-list-item");
 	for (let item of itemsOfProjects)
 		item.addEventListener("click", () => {
 			const nameOfProject = item.textContent;
 			const project = projects.find((item) => item.name == nameOfProject);
-			item.addEventListener("click", () => {
-				window.currentProject = project;
-				createNewCard(project.tasks);
-			});
+
+			currentProject = project;
+			createNewCard(project.tasks);
 		});
 }
 
@@ -83,10 +100,20 @@ function deleteTask(deletionTask) {
 	console.log(`before:`);
 	console.log(currentProject);
 
+	const indexOfCurrentProject = projects.findIndex(
+		(item) => item.name === currentProject.name
+	);
 	const projectTasks = currentProject.tasks;
+
 	for (let task in projectTasks) {
-		if (projectTasks[task].name === deletionTask) projectTasks.splice(task, 1);
+		if (projectTasks[task].name === deletionTask) {
+			// From localStorage of projects we get project and it's tasks
+			// if task matches the name of task for deletion we delete that task
+			projects[indexOfCurrentProject].tasks.splice(task, 1);
+			localStorage.setItem("myProjects", JSON.stringify(projects));
+		}
 	}
+
 	console.log(`after:`);
 	console.log(currentProject);
 }
