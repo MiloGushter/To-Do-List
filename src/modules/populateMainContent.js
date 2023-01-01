@@ -13,6 +13,8 @@
 // 	},
 // ];
 // localStorage.setItem("myProjects", JSON.stringify(sample));
+import { createProject } from "./constructorFunctions";
+import { createTask } from "./constructorFunctions";
 
 let projects = JSON.parse(localStorage.getItem("myProjects"));
 
@@ -22,20 +24,103 @@ export function onLoadPopulate() {
 	createNewCard(projects[0].tasks);
 }
 
-export function populateContent() {
-	// For uncategorized tasks
+export function populateProjectsListOnLoad() {
 	const uncategorizedTasks = document.querySelector(".side-uncategorized");
 	uncategorizedTasks.onclick = () => createNewCard(projects[0].tasks);
-	// For showing taksks of some project
-	const itemsOfProjects = document.querySelectorAll(".side-projects-list-item");
-	for (let item of itemsOfProjects)
-		item.addEventListener("click", () => {
-			const nameOfProject = item.textContent;
-			const project = projects.find((item) => item.name == nameOfProject);
 
+	const projectsList = document.querySelector(".side-projects-list");
+	for (let project of projects) {
+		if (project.name === "Uncategorized") continue;
+
+		const projectsListItem = document.createElement("li");
+		projectsListItem.classList.add("side-projects-list-item");
+		const projectListItemText = document.createElement("p");
+		projectListItemText.textContent = project.name;
+		const removeIcon = document.createElement("span");
+		removeIcon.classList.add("material-icons-outlined");
+		removeIcon.textContent = "clear";
+		projectsListItem.appendChild(projectListItemText);
+		projectsListItem.appendChild(removeIcon);
+		projectsList.appendChild(projectsListItem);
+		projectsListItem.addEventListener("click", () => {
 			currentProject = project;
 			createNewCard(project.tasks);
 		});
+	}
+}
+
+export const populateProjectsForTaskOnLoad = () => {
+	const selectProject = document.querySelector("#task-select-project");
+	for (let project of projects) {
+		if (project.name === "Uncategorized") continue;
+		const selectOption = document.createElement("option");
+		selectOption.textContent = project.name;
+		selectOption.value = project.name;
+		selectProject.append(selectOption);
+	}
+};
+
+export function createNewProject(inputProjectName) {
+	const newProject = new createProject(inputProjectName.value, []);
+	projects.push(newProject);
+	localStorage.setItem("myProjects", JSON.stringify(projects));
+
+	const projectsList = document.querySelector(".side-projects-list");
+
+	const projectsListItem = document.createElement("li");
+	projectsListItem.classList.add("side-projects-list-item");
+
+	const projectListItemText = document.createElement("p");
+	projectListItemText.textContent = inputProjectName.value;
+
+	// TODO: Delete function
+	const removeIcon = document.createElement("span");
+	removeIcon.classList.add("material-icons-outlined");
+	removeIcon.textContent = "clear";
+	removeIcon.addEventListener("click", () => {});
+
+	projectsListItem.appendChild(projectListItemText);
+	projectsListItem.appendChild(removeIcon);
+	projectsList.appendChild(projectsListItem);
+	projectsListItem.addEventListener("click", () => {
+		currentProject = projects[projects.length - 1];
+		createNewCard(projects[projects.length - 1].tasks);
+	});
+	projectsList.append(projectsListItem);
+
+	const selectProject = document.querySelector("#task-select-project");
+	const selectValue = document.createElement("option");
+	selectValue.textContent = projects[projects.length - 1].name;
+	selectValue.value = projects[projects.length - 1].name;
+	selectProject.appendChild(selectValue);
+}
+
+export function createNewTask(
+	inputTaskName,
+	inputTaskDescription,
+	inputTaskDate,
+	selectProject,
+	selectPriority
+) {
+	const taskName = inputTaskName.value;
+	const taskDescription = inputTaskDescription.value;
+	const taskDate = inputTaskDate.value;
+	const selectedProjectForTask = selectProject.value;
+	const taskPriority = selectPriority.value;
+
+	const project = projects.find((item) => item.name == selectedProjectForTask);
+	const newTask = new createTask(
+		taskName,
+		taskDescription,
+		taskDate,
+		selectedProjectForTask,
+		taskPriority
+	);
+
+	project.tasks.push(newTask);
+	localStorage.setItem("myProjects", JSON.stringify(projects));
+
+	createNewCard(project.tasks);
 }
 
 function createNewCard(tasks) {
@@ -117,3 +202,5 @@ function deleteTask(deletionTask) {
 	console.log(`after:`);
 	console.log(currentProject);
 }
+
+function deleteProject() {}
