@@ -306,6 +306,7 @@ nav {
 }
 
 .side-projects-list {
+	display: none;
 	font-size: 0.875rem;
 	opacity: 0;
 	transform: translateY(-20px);
@@ -321,8 +322,15 @@ nav {
 	margin-bottom: 1em;
 	width: 20ch;
 	transition: transform 300ms ease-in;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	span {
+		font-size: 16px;
+	}
 	&:hover {
-		transform: scale(1.05) translate(10px, -2px);
+		transform: scale(1.05);
 		cursor: pointer;
 	}
 }
