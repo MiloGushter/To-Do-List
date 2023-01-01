@@ -34,18 +34,27 @@ export function populateProjectsListOnLoad() {
 
 		const projectsListItem = document.createElement("li");
 		projectsListItem.classList.add("side-projects-list-item");
+
 		const projectListItemText = document.createElement("p");
 		projectListItemText.textContent = project.name;
-		const removeIcon = document.createElement("span");
-		removeIcon.classList.add("material-icons-outlined");
-		removeIcon.textContent = "clear";
-		projectsListItem.appendChild(projectListItemText);
-		projectsListItem.appendChild(removeIcon);
-		projectsList.appendChild(projectsListItem);
-		projectsListItem.addEventListener("click", () => {
+		projectListItemText.addEventListener("click", () => {
 			currentProject = project;
 			createNewCard(project.tasks);
 		});
+
+		// TODO: Create delete function
+		const removeIcon = document.createElement("span");
+		removeIcon.classList.add("material-icons-outlined");
+		removeIcon.textContent = "clear";
+		removeIcon.addEventListener("click", () => {
+			deleteProject(projectsListItem, project.name);
+			projectsListItem.remove();
+			onLoadPopulate();
+		});
+
+		projectsListItem.appendChild(projectListItemText);
+		projectsListItem.appendChild(removeIcon);
+		projectsList.appendChild(projectsListItem);
 	}
 }
 
@@ -72,20 +81,23 @@ export function createNewProject(inputProjectName) {
 
 	const projectListItemText = document.createElement("p");
 	projectListItemText.textContent = inputProjectName.value;
+	projectListItemText.addEventListener("click", () => {
+		currentProject = projects[projects.length - 1];
+		createNewCard(projects[projects.length - 1].tasks);
+	});
 
-	// TODO: Delete function
 	const removeIcon = document.createElement("span");
 	removeIcon.classList.add("material-icons-outlined");
 	removeIcon.textContent = "clear";
-	removeIcon.addEventListener("click", () => {});
+	removeIcon.addEventListener("click", () => {
+		deleteProject(inputProjectName.value);
+		projectsListItem.remove();
+		onLoadPopulate();
+	});
 
 	projectsListItem.appendChild(projectListItemText);
 	projectsListItem.appendChild(removeIcon);
 	projectsList.appendChild(projectsListItem);
-	projectsListItem.addEventListener("click", () => {
-		currentProject = projects[projects.length - 1];
-		createNewCard(projects[projects.length - 1].tasks);
-	});
 	projectsList.append(projectsListItem);
 
 	const selectProject = document.querySelector("#task-select-project");
@@ -182,9 +194,6 @@ function createNewCard(tasks) {
 }
 
 function deleteTask(deletionTask) {
-	console.log(`before:`);
-	console.log(currentProject);
-
 	const indexOfCurrentProject = projects.findIndex(
 		(item) => item.name === currentProject.name
 	);
@@ -198,9 +207,10 @@ function deleteTask(deletionTask) {
 			localStorage.setItem("myProjects", JSON.stringify(projects));
 		}
 	}
-
-	console.log(`after:`);
-	console.log(currentProject);
 }
 
-function deleteProject() {}
+function deleteProject(projectName) {
+	const project = projects.findIndex((item) => item.name === projectName);
+	projects.splice(project, 1);
+	localStorage.setItem("myProjects", JSON.stringify(projects));
+}
