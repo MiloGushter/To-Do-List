@@ -1,4 +1,4 @@
-import { createTask } from "./createTask";
+import { createTask } from "./constructorFunctions";
 import { createNewCard } from "./populateMainContent";
 let projects = JSON.parse(localStorage.getItem("myProjects"));
 
