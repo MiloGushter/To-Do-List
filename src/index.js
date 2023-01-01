@@ -1,16 +1,12 @@
 import "./sass/main.scss";
-import { openHamburgerMenu } from "./modules/hamburgerMenu.js";
+import toggles from "./modules/toggles";
 import { changeIcons } from "./modules/changeIconFill";
-import { openSidebar } from "./modules/toggleSidebar";
-import { toggleProjects } from "./modules/toggleProjects";
 import { showProjectModal } from "./modules/projectModal";
 import { showTaskModal, populateProjectsForTask } from "./modules/taskModal";
 import { onLoadPopulate } from "./modules/populateMainContent";
 import { populateProjectsList } from "./modules/projectModal";
-openHamburgerMenu();
+toggles();
 changeIcons();
-openSidebar();
-toggleProjects();
 showProjectModal();
 showTaskModal();
 onLoadPopulate();
