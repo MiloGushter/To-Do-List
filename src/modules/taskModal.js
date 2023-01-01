@@ -1,16 +1,6 @@
 import { createTask } from "./createTask";
-import { populateContent } from "./populateMainContent";
+import { createNewCard } from "./populateMainContent";
 let projects = JSON.parse(localStorage.getItem("myProjects"));
-
-const resetStyles = () => {
-	inputTaskDescription.value = "";
-	inputTaskName.value = "";
-	modal.classList.add("modal-going-out");
-	setTimeout(() => {
-		modal.classList.remove("modal-going-out");
-		modal.style.display = "none";
-	}, 300);
-};
 
 export function showTaskModal() {
 	const modal = document.querySelector("#modal-task");
@@ -52,6 +42,19 @@ export const populateProjectsForTask = () => {
 		selectOption.value = project.name;
 		selectProject.append(selectOption);
 	}
+};
+
+const resetStyles = () => {
+	const modal = document.querySelector("#modal-task");
+	const inputTaskName = document.querySelector("#task-input-name");
+	const inputTaskDescription = document.querySelector("#task-input-description");
+	inputTaskDescription.value = "";
+	inputTaskName.value = "";
+	modal.classList.add("modal-going-out");
+	setTimeout(() => {
+		modal.classList.remove("modal-going-out");
+		modal.style.display = "none";
+	}, 300);
 };
 
 const createNewTask = () => {
