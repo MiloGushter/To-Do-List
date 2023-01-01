@@ -14,13 +14,21 @@
 			rel="stylesheet"
 		/>
 
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+			integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
 		<title>To-do List</title>
 	<link rel="icon" href="favicon.ico"><script defer src="main.js"></script></head>
 	<body>
 		<div class="modal" id="modal-project">
 			<div class="modal-content" id="modal-content-project">
 				<form>
-					<label for="project-name">Enter the project name</label>
+					<label for="input-project-name">Enter the project name</label>
 					<input type="text" id="input-project-name" class="input-field" />
 					<div class="modal-content-buttons">
 						<button
@@ -44,11 +52,30 @@
 		<div class="modal" id="modal-task">
 			<div class="modal-content" id="modal-content-task">
 				<form>
-					<label for="inputField">Enter the task</label>
-					<input type="text" id="input-task-name" class="input-field" />
-					<label for="inputField">Enter the description</label>
-					<input type="text" id="input-task-description" class="input-field" />
-					<input type="datetime" name="" id="" />
+					<label for="task-input-name">Enter the task</label>
+					<input type="text" id="task-input-name" class="input-field" />
+					<label for="task-input-description">Enter the description</label>
+					<textarea
+						id="task-input-description"
+						class="textarea-field"
+						rows="1"
+					></textarea>
+					<div class="modal-content-inputs">
+						<input
+							type="date"
+							name=""
+							id="task-input-date"
+							class="input-date"
+						/>
+						<select id="task-select-project" class="input-select">
+							<option value="Uncategorized">Uncategorized</option>
+						</select>
+						<select id="task-select-priority" class="input-select">
+							<option value="Low">Low</option>
+							<option value="Medium">Medium</option>
+							<option value="High">High</option>
+						</select>
+					</div>
 					<div class="modal-content-buttons">
 						<button
 							type="button"
@@ -57,7 +84,11 @@
 						>
 							Save
 						</button>
-						<button type="button" class="button cancel-button" id="">
+						<button
+							type="button"
+							class="button cancel-button"
+							id="cancel-button-task"
+						>
 							Cancel
 						</button>
 					</div>
@@ -112,19 +143,11 @@
 						</p>
 						<span class="material-icons-outlined add-projects"> add </span>
 					</div>
-					<ul class="side-projects-list">
-						<li class="side-projects-list-item">
-							Very long project name that might go out
-						</li>
-						<li class="side-projects-list-item">project2</li>
-						<li class="side-projects-list-item">project3</li>
-						<li class="side-projects-list-item">project4</li>
-						<li class="side-projects-list-item">project5</li>
-					</ul>
+					<ul class="side-projects-list"></ul>
 				</div>
 			</aside>
 			<main class="main-container">
-				<div class="task-card"></div>
+				<div class="main-container-cards"></div>
 			</main>
 		</div>
 	</body>
