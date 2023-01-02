@@ -1,5 +1,4 @@
-import { createNewProject } from "./populateMainContent";
-import { createNewTask } from "./populateMainContent";
+import { createNewProject, createNewTask, updateTask } from "./populateMainContent";
 
 export function showProjectModal() {
 	const modal = document.querySelector("#modal-project");
@@ -82,6 +81,58 @@ export function showTaskModal() {
 			selectProject,
 			selectPriority
 		);
+		resetForm();
+		const editTask = document.querySelectorAll(".fa-pen");
+		editTask.forEach((button) => {
+			button.addEventListener("click", () => {
+				modal.style.display = "flex";
+				const currentTask = button.previousSibling.textContent;
+				console.log(currentTask);
+			});
+		});
+	};
+}
+
+export function showTaskEditModal(editButton) {
+	const modal = document.querySelector("#modal-edit-task");
+	const cancelButton = document.querySelector("#cancel-edit-button-task");
+	const updateButton = document.querySelector("#update-button-task");
+	const inputTaskName = document.querySelector("#edit-task-input-name");
+	const inputTaskDescription = document.querySelector("#edit-task-input-description");
+	const inputTaskDate = document.querySelector("#edit-task-input-date");
+	const selectProject = document.querySelector("#edit-task-select-project");
+	const selectPriority = document.querySelector("#edit-task-select-priority");
+
+	editButton.addEventListener("click", () => {
+		modal.style.display = "flex";
+		const currentTask = editButton.previousSibling.textContent;
+		console.log(currentTask);
+	});
+
+	const resetForm = () => {
+		modal.classList.add("modal-going-out");
+		setTimeout(() => {
+			modal.classList.remove("modal-going-out");
+			modal.style.display = "none";
+		}, 300);
+	};
+
+	// Making inputTaskDescription expand as you type
+	inputTaskDescription.addEventListener("input", () => {
+		inputTaskDescription.style.height = "auto";
+		inputTaskDescription.style.height = `${inputTaskDescription.scrollHeight}px`;
+	});
+
+	cancelButton.onclick = () => resetForm();
+
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			resetForm();
+		}
+	};
+
+	updateButton.onclick = () => {
+		updateTask();
 		resetForm();
 	};
 }
