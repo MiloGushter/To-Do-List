@@ -1,5 +1,4 @@
 import { createNewProject } from "./populateMainContent";
-let projects = JSON.parse(localStorage.getItem("myProjects"));
 
 export function showProjectModal() {
 	const modal = document.querySelector("#modal-project");
@@ -18,7 +17,7 @@ export function showProjectModal() {
 	}
 
 	createProjectButton.onclick = () => {
-		modal.style.display = "block";
+		modal.style.display = "flex";
 	};
 
 	cancelButton.onclick = () => resetForm();
