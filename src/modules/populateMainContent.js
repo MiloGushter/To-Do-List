@@ -13,8 +13,8 @@
 // 	},
 // ];
 // localStorage.setItem("myProjects", JSON.stringify(sample));
-import { createProject } from "./constructorFunctions";
-import { createTask } from "./constructorFunctions";
+import { createProject, createTask } from "./constructorFunctions";
+import { showTaskEditModal } from "./showModals";
 
 let projects = JSON.parse(localStorage.getItem("myProjects"));
 
@@ -26,7 +26,10 @@ export function onLoadPopulate() {
 
 export function populateProjectsListOnLoad() {
 	const uncategorizedTasks = document.querySelector(".side-uncategorized");
-	uncategorizedTasks.onclick = () => createNewCard(projects[0].tasks);
+	uncategorizedTasks.onclick = () => {
+		currentProject = projects[0];
+		createNewCard(projects[0].tasks);
+	};
 
 	const projectsList = document.querySelector(".side-projects-list");
 	for (let project of projects) {
@@ -37,12 +40,18 @@ export function populateProjectsListOnLoad() {
 
 		const projectListItemText = document.createElement("p");
 		projectListItemText.textContent = project.name;
+		projectListItemText.classList.add("side-project-list-item-name");
 		projectListItemText.addEventListener("click", () => {
+			const items = document.querySelectorAll(".side-project-list-item-name");
+			items.forEach((item) => {
+				item.classList.remove("selected-project");
+			});
+			projectListItemText.classList.add("selected-project");
+
 			currentProject = project;
 			createNewCard(project.tasks);
 		});
 
-		// TODO: Create delete function
 		const removeIcon = document.createElement("span");
 		removeIcon.classList.add("material-icons-outlined");
 		removeIcon.textContent = "clear";
@@ -60,12 +69,14 @@ export function populateProjectsListOnLoad() {
 
 export const populateProjectsForTaskOnLoad = () => {
 	const selectProject = document.querySelector("#task-select-project");
+	const updateProject = document.querySelector("#edit-task-select-project");
 	for (let project of projects) {
 		if (project.name === "Uncategorized") continue;
 		const selectOption = document.createElement("option");
 		selectOption.textContent = project.name;
 		selectOption.value = project.name;
 		selectProject.append(selectOption);
+		updateProject.append(selectOption);
 	}
 };
 
@@ -81,7 +92,14 @@ export function createNewProject(inputProjectName) {
 
 	const projectListItemText = document.createElement("p");
 	projectListItemText.textContent = inputProjectName.value;
+	projectListItemText.classList.add("side-project-list-item-name");
 	projectListItemText.addEventListener("click", () => {
+		const items = document.querySelectorAll(".side-project-list-item-name");
+		console.log(items);
+		items.forEach((item) => {
+			item.classList.remove("selected-project");
+		});
+		projectListItemText.classList.add("selected-project");
 		currentProject = projects[projects.length - 1];
 		createNewCard(projects[projects.length - 1].tasks);
 	});
@@ -135,6 +153,60 @@ export function createNewTask(
 	createNewCard(project.tasks);
 }
 
+export function updateTask(
+	taskForEdit,
+	inputTaskName,
+	inputTaskDescription,
+	inputTaskDate,
+	selectProject,
+	selectPriority
+) {
+	const taskName = inputTaskName.value;
+	const taskDescription = inputTaskDescription.value;
+	const taskDate = inputTaskDate.value;
+	const selectedProjectForTask = selectProject.value;
+	const taskPriority = selectPriority.value;
+	const updateProject = projects.find((item) => item.name === selectedProjectForTask);
+
+	const projectForEditIndex = projects.findIndex(
+		(item) => item.name === currentProject.name
+	);
+	// ? If selected project from drop menu in update modal is the same as project where the task is
+	// ? then you only need to update the value else you need to delete task from project that is
+	// ? currently selected and add new project to project from drop down menu
+
+	const projectTasksForEdit = currentProject.tasks;
+	console.log({ projectForEditIndex });
+	const taskForEditIndex = projectTasksForEdit.findIndex(
+		(item) => item.name === taskForEdit
+	);
+	if (projects[projectForEditIndex].name === selectedProjectForTask) {
+		projects[projectForEditIndex].tasks[taskForEditIndex].name = taskName;
+		projects[projectForEditIndex].tasks[taskForEditIndex].description =
+			taskDescription;
+		projects[projectForEditIndex].tasks[taskForEditIndex].date = taskDate;
+		projects[projectForEditIndex].tasks[taskForEditIndex].priority = taskPriority;
+		localStorage.setItem("myProjects", JSON.stringify(projects));
+		createNewCard(projects[projectForEditIndex].tasks);
+	} else {
+		projects[projectForEditIndex].tasks.splice(taskForEditIndex, 1);
+		const newProjectIndex = projects.findIndex(
+			(item) => item.name === selectedProjectForTask
+		);
+		projects[newProjectIndex].tasks.push(
+			new createTask(
+				taskName,
+				taskDescription,
+				taskDate,
+				selectedProjectForTask,
+				taskPriority
+			)
+		);
+		localStorage.setItem("myProjects", JSON.stringify(projects));
+		createNewCard(projects[projectForEditIndex].tasks);
+	}
+}
+
 function createNewCard(tasks) {
 	const mainContainer = document.querySelector(".main-container-cards ");
 	while (mainContainer.firstChild) mainContainer.removeChild(mainContainer.firstChild);
@@ -148,6 +220,7 @@ function createNewCard(tasks) {
 		const editIcon = document.createElement("i");
 		editIcon.classList.add("fa-sharp", "fa-solid", "fa-pen", "fa-sm");
 		cardTitle.append(editIcon);
+		showTaskEditModal(editIcon);
 
 		const cardDescription = document.createElement("p");
 		cardDescription.classList.add("task-card-description");
