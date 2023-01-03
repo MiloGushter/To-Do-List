@@ -82,16 +82,10 @@ export function showTaskModal() {
 			selectPriority
 		);
 		resetForm();
-		const editTask = document.querySelectorAll(".fa-pen");
-		editTask.forEach((button) => {
-			button.addEventListener("click", () => {
-				modal.style.display = "flex";
-				const currentTask = button.previousSibling.textContent;
-				console.log(currentTask);
-			});
-		});
 	};
 }
+
+let currentTask;
 
 export function showTaskEditModal(editButton) {
 	const modal = document.querySelector("#modal-edit-task");
@@ -105,11 +99,12 @@ export function showTaskEditModal(editButton) {
 
 	editButton.addEventListener("click", () => {
 		modal.style.display = "flex";
-		const currentTask = editButton.previousSibling.textContent;
-		console.log(currentTask);
+		currentTask = editButton.previousSibling.textContent;
 	});
 
 	const resetForm = () => {
+		inputTaskDescription.value = "";
+		inputTaskName.value = "";
 		modal.classList.add("modal-going-out");
 		setTimeout(() => {
 			modal.classList.remove("modal-going-out");
@@ -132,7 +127,14 @@ export function showTaskEditModal(editButton) {
 	};
 
 	updateButton.onclick = () => {
-		updateTask();
+		updateTask(
+			currentTask,
+			inputTaskName,
+			inputTaskDescription,
+			inputTaskDate,
+			selectProject,
+			selectPriority
+		);
 		resetForm();
 	};
 }
