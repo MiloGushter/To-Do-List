@@ -95,6 +95,54 @@
 				</form>
 			</div>
 		</div>
+		<div class="modal" id="modal-edit-task">
+			<div class="modal-content" id="modal-content-edit-task">
+				<form>
+					<label for="edit-task-input-name">Update the task</label>
+					<input type="text" id="edit-task-input-name" class="input-field" />
+					<label for="edit-task-input-description"
+						>Update the description</label
+					>
+					<textarea
+						id="edit-task-input-description"
+						class="textarea-field"
+						rows="1"
+					></textarea>
+					<div class="modal-content-inputs">
+						<input
+							type="date"
+							name=""
+							id="edit-task-input-date"
+							class="input-date"
+						/>
+						<select id="edit-task-select-project" class="input-select">
+							<option value="Uncategorized">Uncategorized</option>
+						</select>
+						<select id="edit-task-select-priority" class="input-select">
+							<option value="Low">Low</option>
+							<option value="Medium">Medium</option>
+							<option value="High">High</option>
+						</select>
+					</div>
+					<div class="modal-content-buttons">
+						<button
+							type="button"
+							class="button save-button"
+							id="update-button-task"
+						>
+							update
+						</button>
+						<button
+							type="button"
+							class="button cancel-button"
+							id="cancel-edit-button-task"
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 		<nav>
 			<div class="nav-container">
 				<ul class="nav-list-buttons">
