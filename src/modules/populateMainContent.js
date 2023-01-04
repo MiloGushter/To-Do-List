@@ -1,22 +1,27 @@
-// let sample = [
-// 	{
-// 		name: "Uncategorized",
-// 		tasks: [
-// 			{
-// 				name: "Sample task",
-// 				description: "This is some long text for the description of this task",
-// 				date: "2023-01-05",
-// 				fromProject: "Uncategorized",
-// 				priority: "low",
-// 			},
-// 		],
-// 	},
-// ];
-// localStorage.setItem("myProjects", JSON.stringify(sample));
 import { createProject, createTask } from "./constructorFunctions";
 import { showTaskEditModal } from "./showModals";
 
-let projects = JSON.parse(localStorage.getItem("myProjects"));
+let projects = (() => {
+	if (localStorage.getItem("myProjects") === null) {
+		let sample = [
+			{
+				name: "Uncategorized",
+				tasks: [
+					{
+						name: "Sample task",
+						description:
+							"This is some long text for the description of this task",
+						date: "2023-01-05",
+						fromProject: "Uncategorized",
+						priority: "low",
+					},
+				],
+			},
+		];
+		localStorage.setItem("myProjects", JSON.stringify(sample));
+	}
+	return JSON.parse(localStorage.getItem("myProjects"));
+})();
 
 let currentProject = projects[0];
 
@@ -76,7 +81,7 @@ export const populateProjectsForTaskOnLoad = () => {
 		selectOption.textContent = project.name;
 		selectOption.value = project.name;
 		selectProject.append(selectOption);
-		updateProject.append(selectOption);
+		updateProject.append(selectOption.cloneNode(true));
 	}
 };
 
